@@ -25,6 +25,8 @@ footer {
 footer h4 {
     font-size: 12px;
     text-align: left;
+    position: relative;
+    left: 2%;
 }
 
 .quiz-body{
@@ -39,6 +41,12 @@ footer h4 {
     height: 40px;
     position: relative;
     text-align: center;
+}
+
+.quiz-body h4 {
+    height: 20px;
+    text-align: center;
+    position: relative;
 }
 
 button {
