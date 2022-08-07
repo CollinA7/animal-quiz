@@ -1,13 +1,16 @@
-// user clicks on the start quiz button
 document.getElementById("start-button").addEventListener("click", startQuiz);
-document.getElementsByClassName("body-content")
+var startButton = document.getElementById("start-button");
+var quizContent = document.getElementById("quiz-body");
 
+// user clicks on the start quiz button
+// This function first removes the body content to 
 function startQuiz() {
-    console.log("")
+    quizContent.remove();
+    startButton.remove();
 }
+
 // the button creates a timer on the top of the screen
 
-//The instructions and the Start quiz button get removed
 
 // the user is then shown the first question with button responses
 
