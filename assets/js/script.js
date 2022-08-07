@@ -1,7 +1,10 @@
-// user is introduced to the quiz
-
 // user clicks on the start quiz button
+document.getElementById("start-button").addEventListener("click", startQuiz);
+document.getElementsByClassName("body-content")
 
+function startQuiz() {
+    console.log("")
+}
 // the button creates a timer on the top of the screen
 
 //The instructions and the Start quiz button get removed
