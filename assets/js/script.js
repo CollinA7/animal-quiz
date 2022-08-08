@@ -2,13 +2,22 @@ document.getElementById("start-button").addEventListener("click", startQuiz);
 var startButton = document.querySelector("#start-button");
 var quizContent = document.querySelector("#quiz-body");
 
+// This is the correct answer array
+var correctAnimal = ["Clownfish", "Cheetah", "Armadillo"];
+
 // user clicks on the start quiz button
 // This function changes the HTML to present the user with the the first question 
 function startQuiz() {
     //  This line replaces the current html with the generated question
-    document.getElementById("question-prompt").innerHTML = "What orange and white fish is known for hosting in an anemone for protection?";
- 
     document.getElementById("sub-prompt").remove();
+    
+    questionOne();
+}
+
+var questionOne = function() {
+    document.getElementById("question-prompt").innerHTML = "What orange and white fish is known for hosting in an anemone for protection?";
+    
+
 }
 
 
