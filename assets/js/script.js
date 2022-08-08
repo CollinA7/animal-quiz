@@ -1,26 +1,16 @@
 document.getElementById("start-button").addEventListener("click", startQuiz);
-var startButton = document.querySelector("start-button");
-var quizContent = document.querySelector("quiz-body");
+var startButton = document.querySelector("#start-button");
+var quizContent = document.querySelector("#quiz-body");
 
 // user clicks on the start quiz button
-// This function first removes the body content to 
+// This function changes the HTML to present the user with the the first question 
 function startQuiz() {
-    quizContent.remove();
-    startButton.remove();
+    //  This line replaces the current html with the generated question
+    document.getElementById("question-prompt").innerHTML = "What orange and white fish is known for hosting in an anemone for protection?";
+    //  This line hides the h4 element during the test 
+    document.getElementById("sub-prompt").remove();
 }
 
-
-// the button creates a timer on the top of the screen
-
-
-// the user is then shown the first question with button responses
-var questionForm = function() {
-    // display the first question
-    
-    // buttons are created for each of th answers
-
-
-}
 // if the user selects an answer
 
 // the quiz determines if the answer is correct or not
@@ -32,6 +22,3 @@ var questionForm = function() {
 // if the user is not correct a message will be discplayed that it was incorrect
 
 // The user will lose points
-
-
-
