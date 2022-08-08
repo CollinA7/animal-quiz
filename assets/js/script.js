@@ -7,9 +7,10 @@ var quizContent = document.querySelector("#quiz-body");
 function startQuiz() {
     //  This line replaces the current html with the generated question
     document.getElementById("question-prompt").innerHTML = "What orange and white fish is known for hosting in an anemone for protection?";
-    //  This line hides the h4 element during the test 
+ 
     document.getElementById("sub-prompt").remove();
 }
+
 
 // if the user selects an answer
 
