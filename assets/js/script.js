@@ -1,8 +1,9 @@
 var answerBtnBox = document.querySelector(".btn-box");
 var quizContent = document.querySelector("#quiz-body");
 var startButton = document.querySelector("#start-button");
-var timerEl = document.querySelector("#timer")
+var timerEl = document.querySelector("#timer");
 var timeLeft = 0;
+var score = 0;
 
 //  These are the Arrays for the questions and the answers
 var questionSelector = [
@@ -45,21 +46,24 @@ var buttonHandler = function(event) {
     console.log(event.target);
 
     if(event.target.matches(".btn1")) {
-        window.alert("Correct!!  +10 points");
+        window.alert("Correct!!  +8 points");
         
         clearBody();
         questionTwo();
+        score = (score + 8);
     }
     if(event.target.matches(".btn2")){
-        window.alert("Correct!!  +10 points"); 
+        window.alert("Correct!!  +8 points"); 
         clearBody();
         questionThree();
+        score = (score + 8);
     }
     if(event.target.matches(".btn3")){
-        window.alert("Correct!!  +10 points");
+        window.alert("Correct!!  +8 points");
         clearBody();
         endQuiz();
         
+        score = (score + 8);
     }
     else if(event.target.matches(".btn")) {
         window.alert("Incorrect  -10 seconds")
@@ -68,6 +72,22 @@ var buttonHandler = function(event) {
             
     }
     
+    if (event.target.matches("#name-input")){
+        nameBoxInput = function() {
+            var nameInput = document.getElementById("name-input").value
+            console.log(nameInput.letter.value)
+        }
+    }
+    
+    if (event.target.matches("#submit-score")){
+        saveScores();
+    }
+    
+    if(event.target.matches("#start-button")){
+        startQuiz();
+    }
+
+
 
 }
 
@@ -88,6 +108,7 @@ function countTimer() {
         clearBody()
         endQuiz();
 
+        clearInterval(timeInterval);
     }
 
     }, 1000);
@@ -201,21 +222,53 @@ function questionThree() {
     
 }
 
+
 function endQuiz(){
-
     timeLeft = 0;
-
+    
     
     var endPrompt = document.createElement("h2");
-    endPrompt.textContent = ("You have completed the quiz, here is your final score");
-    quizContent.appendChild(enterScore);
-
-    // var displayScore = document.createElement("h4");
-    // displayScore.textContent = (score = "")
-    // quizContent.textContent = 
+    endPrompt.textContent = ("You have completed the quiz, here is your final score.");
+    quizContent.appendChild(endPrompt);
+    
+    var displayScore = document.createElement("h2");
+    displayScore.textContent = score;
+    quizContent.appendChild(displayScore);
+    
+    var scorePrompt = document.createElement("h4");
+    scorePrompt.textContent = ("Plese enter your name to add to the score-board.");
+    answerBtnBox.appendChild(scorePrompt);
+    
+    var nameBox = document.createElement("input");
+    nameBox.placeholder = ("Please enter your name")
+    nameBox.textContent = ("")
+    nameBox.id = ("name-input")
+    answerBtnBox.appendChild(nameBox);
+    
+    var submitScore = document.createElement("button");
+    submitScore.textContent = ("Submit");
+    submitScore.className = ("submit-score");
+    submitScore.id = "submit-score";
+    answerBtnBox.appendChild(submitScore);
+    
+    var startButton = document.createElement("button");
+    startButton.textContent = ("Re-start quiz");
+    startButton.className = ("score-input")
+    startButton.id = ("start-button");
+    answerBtnBox.appendChild(startButton);
+    
 
 }
 
+function playerName() {
+    var nameBoxInput = document.getElementById("name-input").value;
+    console.log(nameBoxInput.value)
+}
+
+
+var saveScores = function() {
+    localStorage.setItem("score", JSON.stringify(score));
+}
 
 startButton.addEventListener("click", startQuiz);
-answerBtnBox.addEventListener("click", buttonHandler)
+answerBtnBox.addEventListener("click", buttonHandler);
