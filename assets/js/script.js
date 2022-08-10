@@ -1,6 +1,9 @@
 var answerBtnBox = document.querySelector(".btn-box");
 var quizContent = document.querySelector("#quiz-body");
 var startButton = document.querySelector("#start-button");
+var timerEl = document.getElementById("timer")
+var timeLeft = 60;
+
 
 //  These are the Arrays for the questions and the answers
 var questionSelector = [
@@ -26,7 +29,7 @@ function startQuiz() {
     clearBody();
     questionOne();
     startButton.remove();
-    // Add timer to the header
+    countTimer();
     
 }
 
@@ -41,28 +44,52 @@ var buttonHandler = function(event) {
     console.log(event.target);
 
     if(event.target.matches(".btn1")) {
-        console.log("you freakin did it");
+        window.alert("Correct!!  +10 points");
         
         clearBody();
         questionTwo();
     }
     if(event.target.matches(".btn2")){
-        console.log("good stuff");
+        window.alert("Correct!!  +10 points"); 
         clearBody();
         questionThree();
     }
     if(event.target.matches(".btn3")){
+        window.alert("Correct!!  +10 points");
         clearBody();
-        console.log("good stuff");
-        // add show score function here
+        
     }
     else if(event.target.matches(".btn")) {
-        // window.alert("try again  -10 seconds")
+        window.alert("try again  -10 seconds")
 
-        // add time deduction
+        
     }
 
 }
+
+function countTimer() {
+
+    var timeInterval = setInterval(function () {
+      
+      if (timeLeft > 1) {
+        
+        timerEl.textContent = timeLeft;
+        
+        timeLeft--;
+      } else if (timeLeft === 1) {
+        
+        timerEl.textContent = timeLeft;
+        timeLeft--;
+      } else {
+        
+        timerEl.textContent = '';
+    
+        clearInterval(timeInterval);
+
+      }
+    }, 1000);
+}
+  
 
 function questionOne() {
     
