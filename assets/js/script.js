@@ -1,9 +1,8 @@
 var answerBtnBox = document.querySelector(".btn-box");
 var quizContent = document.querySelector("#quiz-body");
 var startButton = document.querySelector("#start-button");
-var timerEl = document.getElementById("timer")
-var timeLeft = 60;
-
+var timerEl = document.querySelector("#timer")
+var timeLeft = 0;
 
 //  These are the Arrays for the questions and the answers
 var questionSelector = [
@@ -21,11 +20,11 @@ var incorrectAnimals = [
 ]; //   0           1       2           3           4       5           6           7           8                   9
 
 
+//  This is the start quiz function. this works as a handler invoking other funcitons
 function startQuiz() {
     
-    // document.getElementById("sub-prompt").innerHTML = "";
-    // document.getElementById("question-prompt").innerHTML = "";
-    
+    timeLeft = 60;
+
     clearBody();
     questionOne();
     startButton.remove();
@@ -40,6 +39,8 @@ var clearBody = function() {
 
 }
 
+
+// --------This function handles the buttons------
 var buttonHandler = function(event) {
     console.log(event.target);
 
@@ -57,10 +58,11 @@ var buttonHandler = function(event) {
     if(event.target.matches(".btn3")){
         window.alert("Correct!!  +10 points");
         clearBody();
+        endQuiz();
         
     }
     else if(event.target.matches(".btn")) {
-        window.alert("try again  -10 seconds")
+        window.alert("Incorrect  -10 seconds")
 
         timeLeft = (timeLeft - 10);
             
@@ -69,26 +71,25 @@ var buttonHandler = function(event) {
 
 }
 
+// --------- Here in the Timer function ---------
 function countTimer() {
 
     var timeInterval = setInterval(function () {
       
-      if (timeLeft > 1) {
+      if (timeLeft >= 0) {
         
         timerEl.textContent = timeLeft;
         
         timeLeft--;
-      } else if (timeLeft === 1) {
-        
-        timerEl.textContent = timeLeft;
-        timeLeft--;
-      } else {
-        
-        timerEl.textContent = '';
-    
-        clearInterval(timeInterval);
 
-      }
+    }
+
+    else if(timeLeft < 0){
+        clearBody()
+        endQuiz();
+
+    }
+
     }, 1000);
 }
   
@@ -198,6 +199,21 @@ function questionThree() {
     answerBtnBox.appendChild(answerFour);
     
     
+}
+
+function endQuiz(){
+
+    timeLeft = 0;
+
+    
+    var endPrompt = document.createElement("h2");
+    endPrompt.textContent = ("You have completed the quiz, here is your final score");
+    quizContent.appendChild(enterScore);
+
+    // var displayScore = document.createElement("h4");
+    // displayScore.textContent = (score = "")
+    // quizContent.textContent = 
+
 }
 
 
