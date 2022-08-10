@@ -50,22 +50,27 @@ footer h4 {
 }
 
 button {
-    padding: auto;
+    margin: 5px;
+    padding: 1px 6px;
     border: black 1px solid;
     background-color: rgb(46, 201, 228);
     border-radius: 1pc;
-    
 }
 
 button:hover {
     background-color: #1d8077;
     color:#2dd6c8;
 }
-.quiz-body button{
-    font-size: 20px;
+
+
+.btn-box {
+    bottom: -28%;
+    width: auto;
+    padding: auto;
     position: relative;
-    top: 50%;
-    left: 45%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 @media screen and (max-width: 500px) {
