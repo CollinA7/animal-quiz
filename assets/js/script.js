@@ -1,7 +1,6 @@
-document.getElementById("start-button").addEventListener("click", startQuiz);
 var startButton = document.querySelector("#start-button");
 var quizContent = document.querySelector("#quiz-body");
-var buttonIdCounter = 0;
+
 
 //  These are the Arrays for the questions and the answers
 var questionSelector = [
@@ -18,14 +17,6 @@ var incorrectAnimals = [
     "Giraffe", "Rhino", "Ostrich", "Salmon", "Koi fish", "Catfish", "Goldfish", "Lion", "American Opossum"
 ];
 
-var buttonHandler = function(event) {
-    console.log(event.target);
-
-    if (event.target.matches(".btn")) {
-        var buttonIdCounter = event.target.getAttribute("answer-btn-id");
-        console.log(buttonIdCounter);
-    }
-}
 
 function startQuiz() {
     
@@ -33,45 +24,63 @@ function startQuiz() {
     document.getElementById("question-prompt").innerHTML = "";
     
     startButton.remove();
-
+    
     questionOne();
     // Add timer to the header
+    
+}
 
+var buttonHandler = function(event) {
+    console.log(event.target);
 
-    function questionOne() {
-        // document.getElementById("buttonIdCounter").addEventListener("click", console.log("yes"))
+    if(event.target.matches(".btn1", ".btn2", ".btn3")) {
+        console.log("you freakin did it")
+    }
+    
+    else if(event.target.matches(".btn")) {
+        window.alert("try again")
 
-        // This variable adds the question to the body
-        var firstQuestion = document.getElementById("quiz-body");
-
-        var questionPrompt = document.createElement("h2");
-        questionPrompt.textContent = questionSelector[0];
-        firstQuestion.appendChild(questionPrompt);
-
-        //  Answer one options
-        var questionAnswer = document.createElement("button");
-        questionAnswer.textContent = incorrectAnimals[3];
-        questionAnswer.className = ("btn");
-        questionAnswer.setAttribute("answer-btn-id", buttonIdCounter++);
-        firstQuestion.appendChild(questionAnswer);
-        
-        var questionAnswer = document.createElement("button");
-        questionAnswer.textContent = incorrectAnimals[6];
-        questionAnswer.className = ("btn");
-        questionAnswer.setAttribute("answer-btn-id", buttonIdCounter++);
-        firstQuestion.appendChild(questionAnswer);
-
-        var questionAnswer = document.createElement("button");
-        questionAnswer.textContent = correctAnimal[0];
-        questionAnswer.className = ("btn");
-        questionAnswer.setAttribute("answer-btn-id", buttonIdCounter++);
-        firstQuestion.appendChild(questionAnswer);
-
-        var questionAnswer = document.createElement("button");
-        questionAnswer.textContent = incorrectAnimals[4];
-        questionAnswer.className = ("btn");
-        questionAnswer.setAttribute("answer-btn-id", buttonIdCounter++);
-        firstQuestion.appendChild(questionAnswer);
+        // add time deduction
     }
 
 }
+
+function questionOne() {
+    
+    var questionPrompt = document.createElement("h2");
+    questionPrompt.textContent = questionSelector[0];
+    quizContent.appendChild(questionPrompt);
+    
+    //  Answer one options
+    var answerOne = document.createElement("button");
+    answerOne.textContent = incorrectAnimals[3];
+    answerOne.className ="btn";
+    answerOne.id = "answer-one"
+    quizContent.appendChild(answerOne);
+    
+    // -------
+    var answerTwo = document.createElement("button");
+    answerTwo.textContent = incorrectAnimals[6];
+    answerTwo.className = "btn";
+    answerTwo.id = "answer-two";
+    quizContent.appendChild(answerTwo);
+    
+    
+    var answerThree = document.createElement("button");
+    answerThree.textContent = correctAnimal[0];
+    answerThree.className = "btn1";
+    answerThree.id = "answer-three";
+    quizContent.appendChild(answerThree);
+    
+    var answerFour = document.createElement("button");
+    answerFour.textContent = incorrectAnimals[4];
+    answerFour.className = "btn";
+    answerFour.id = "answer-four";
+    quizContent.appendChild(answerFour);
+    
+    
+}
+
+
+startButton.addEventListener("click", startQuiz);
+quizContent.addEventListener("click", buttonHandler)
