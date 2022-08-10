@@ -62,8 +62,10 @@ var buttonHandler = function(event) {
     else if(event.target.matches(".btn")) {
         window.alert("try again  -10 seconds")
 
-        
+        timeLeft = (timeLeft - 10);
+            
     }
+    
 
 }
 
