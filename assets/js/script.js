@@ -34,7 +34,6 @@ function startQuiz() {
 }
 
 var clearBody = function() {
-    console.log("this is the delete fuction")
     document.getElementById("quiz-body").innerHTML = "";
     document.getElementById("btn-box").innerHTML = "";
 
@@ -43,7 +42,6 @@ var clearBody = function() {
 
 // --------This function handles the buttons------
 var buttonHandler = function(event) {
-    console.log(event.target);
 
     if(event.target.matches(".btn1")) {
         window.alert("Correct!!  +8 points");
@@ -75,12 +73,12 @@ var buttonHandler = function(event) {
     if (event.target.matches("#name-input")){
         nameBoxInput = function() {
             var nameInput = document.getElementById("name-input").value
-            console.log(nameInput.letter.value)
         }
     }
     
-    if (event.target.matches("#submit-score")){
-        saveScores();
+    if (event.target.matches(".submit-score")){
+        var name = document.getElementsByClassName("nameInput")[0].value
+        saveScores(name);
     }
     
     if(event.target.matches("#start-button")){
@@ -240,9 +238,8 @@ function endQuiz(){
     answerBtnBox.appendChild(scorePrompt);
     
     var nameBox = document.createElement("input");
-    nameBox.placeholder = ("Please enter your name")
-    nameBox.textContent = ("")
-    nameBox.id = ("name-input")
+    nameBox.placeholder = ("Please enter your name");
+    nameBox.className = ("nameInput")
     answerBtnBox.appendChild(nameBox);
     
     var submitScore = document.createElement("button");
@@ -261,13 +258,39 @@ function endQuiz(){
 }
 
 function playerName() {
-    var nameBoxInput = document.getElementById("name-input").value;
-    console.log(nameBoxInput.value)
+    var nameBoxInput = document.getElementById("nameInput").value;
+}
+var loadScores = function() {
+    var storage = localStorage.getItem("scores");
+    if(storage == null) return;
+
+        var storageArray = JSON.parse(storage)
+    for (let index = 0; index < storageArray.length; index++) {
+        const element = storageArray[index];
+        var scoreDiv = document.getElementById("quiz-body")
+        var score = document.createElement("h2");
+        score.textContent = (`player: ${element.name}, score: ${element.score}` );
+        scoreDiv.appendChild(score);
+    }
+    
+
 }
 
-
-var saveScores = function() {
-    localStorage.setItem("score", JSON.stringify(score));
+var saveScores = function(name) {
+    var player = {name: name, score: score};
+    var storage = localStorage.getItem("scores");
+    if(storage == null) {
+        var storageArray = []
+        storageArray.push(player)
+        localStorage.setItem("scores", JSON.stringify(storageArray));
+    }
+    else {
+        var storageArray = JSON.parse(storage)
+        storageArray.push(player)
+        localStorage.setItem("scores", JSON.stringify(storageArray));
+    }
+    
+    loadScores();
 }
 
 startButton.addEventListener("click", startQuiz);
